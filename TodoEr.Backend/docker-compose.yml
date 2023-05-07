@@ -1,8 +1,32 @@
 version: '3.4'
 
+volumes:
+  db_volume:
+
+networks:
+  api-db:
+    driver: bridge
+
 services:
   api:
     image: ${DOCKER_REGISTRY-}todoer.api
     build:
       context: .
       dockerfile: API/Dockerfile
+    networks:
+      - api-db
+    depends_on:
+      - db
+  db:
+    image: postgres:15.2
+    ports:
+      - "5432:5432"
+    restart: always
+    environment:
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "localpassword"
+      POSTGRES_DB: "TodoEr"
+    volumes:
+      - db_volume:/var/lib/postgresql/data
+    networks:
+      - api-db
