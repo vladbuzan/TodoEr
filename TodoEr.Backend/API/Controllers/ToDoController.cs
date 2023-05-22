@@ -12,10 +12,7 @@ public class ToDoController
 {
     private readonly IMediator _mediatr;
 
-    public ToDoController(IMediator mediatr)
-    {
-        _mediatr = mediatr;
-    }
+    public ToDoController(IMediator mediatr) => _mediatr = mediatr;
 
     [HttpGet]
     public async Task<IEnumerable<ToDoSimpleView>> GetAllAsync()

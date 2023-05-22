@@ -6,9 +6,5 @@ public record CreateToDoRequest(string Title, string Description);
 
 public class CreateToDoRequestValidator : AbstractValidator<CreateToDoRequest>
 {
-    public CreateToDoRequestValidator()
-    {
-        RuleFor(x => x.Title).NotEmpty();
-    }
+    public CreateToDoRequestValidator() => _ = RuleFor(x => x.Title).NotEmpty();
 }
-
